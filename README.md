@@ -5,16 +5,18 @@ pythonにおけるlinqの実装を目指したライブラリです。
 # filter
 
 ```
-query = pinq([1,2,3]).filter(
-  lambda x: x == 1,
-  lambda x: x == 2,
+query = pinq([-1, 0, 5, 10]).filter(
+  lambda x: 0 <= x,
+  lambda x: x < 10,
 )
+list(query)  # => [0, 5]
 
-query = pinq("abcdefg").filter(
+query = pinq("abcdefg").filter_or(
   lambda x: x == "a",
   lambda x: x == "c",
   lambda x: x == "f",
 )
+list(query)  # => ["a", "c", "f"]
 ```
 
 # stateless iterator
