@@ -3,6 +3,8 @@ pythonにおけるlinqの実装を目指したライブラリです。
 イテレータに対して汎用的な機能を提供します。
 
 # filter
+builtinのfilterと違い、複数の条件を位置限定引数として受け入れ可能です。（空も可能）
+これにより、動的な条件組み立てなど高度なクエリの表現が可能です。
 
 ```
 query = pinq([-1, 0, 5, 10]).filter(
@@ -17,6 +19,14 @@ query = pinq("abcdefg").filter_or(
   lambda x: x == "f",
 )
 list(query)  # => ["a", "c", "f"]
+
+condition = dict(
+  contry="tokyo",
+  age=20,
+  sex=None,
+)
+query = Linq(condition).items().filter(lambda x: not x[1] is None).map(lambda x: op[x[0]] == x[1])
+result = pinq(customers).filter_or(**query)
 ```
 
 # stateless iterator
