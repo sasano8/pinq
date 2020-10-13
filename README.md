@@ -144,7 +144,7 @@ def update_cancel():
 
 @Linq.dummy().until(is_cancelled).take(1000).repeat_infinity()
 async def get_data():
-    yield {"nam": "test", "age": 20}
+    await {"nam": "test", "age": 20}
 
 database1 = []
 database2 = []
