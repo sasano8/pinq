@@ -142,7 +142,7 @@ def update_cancel():
   if val > 0.95:
     _is_cancelled = True
 
-@Linq.dummy().until(is_cancelled).take(1000).repeat_infinity()
+@Linq.dummy().repeat_infinity().until(is_cancelled).take(1000)
 async def get_data():
     await {"nam": "test", "age": 20}
 
