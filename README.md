@@ -51,3 +51,31 @@ for item in query.attach([4, 5, 6])
   # =>  8, 10, 12
 ```
 
+# generator
+generator関数でイテレータを取得するには、generator関数を実行する必要があります。
+Linqを使うことで、generator関数を隠蔽し、イテレートを要求時に何度でもイテレータを生成するオブジェクトを簡単に作成することができます。
+
+```
+def generate():
+  yield 1
+  yield 2
+
+# way 1
+for item in generate():
+  print(item)
+
+# way 2
+generator = Linq(generate)
+
+for item in generator:
+  print(item)
+
+# way 3
+@Linq
+def generate():
+  yield 1
+  yield 2
+
+for item in generate:
+  print(item)
+```
