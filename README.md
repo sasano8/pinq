@@ -127,3 +127,33 @@ def generate():
 for item in generate:
   print(item)
 ```
+
+# observable
+
+```
+import random
+_is_cancelled = False
+
+def is_cancelled():
+  return _is_cancelled
+
+def update_cancel():
+  val = random.random()
+  if val > 0.95:
+    _is_cancelled = True
+
+@Linq.dummy().until(is_cancelled).take(1000).repeat_infinity()
+async def get_data():
+    yield {"nam": "test", "age": 20}
+
+database1 = []
+database2 = []
+
+observer = Linq.dummy().dispatch(
+  database1.append,
+  database2.append,
+  lambda x: update_cancel()
+)
+
+observer.subscribe(get_data)
+```
