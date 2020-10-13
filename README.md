@@ -2,6 +2,20 @@
 pythonにおけるlinqの実装を目指したライブラリです。
 イテレータに対して汎用的な機能を提供します。
 
+# filter
+
+```
+query = pinq([1,2,3]).filter(
+  lambda x: x == 1,
+  lambda x: x == 2,
+)
+
+query = pinq("abcdefg").filter(
+  lambda x: x == "a",
+  lambda x: x == "c",
+  lambda x: x == "f",
+)
+```
 
 # stateless iterator
 mapやfilterといったビルドインのイテレータhook関数は一度イテレータを消費すると、再消費ができません。（statefull iterator）
