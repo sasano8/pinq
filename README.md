@@ -142,18 +142,21 @@ def update_cancel():
   if val > 0.95:
     _is_cancelled = True
 
-@Linq.dummy().repeat_infinity()
-async def get_data():
-    await {"nam": "test", "age": 20}
+def get_data():
+    return {"name": "test", "age": 20}
 
 database1 = []
 database2 = []
 
-observer = Linq.dummy().until(is_cancelled).take(1000).dispatch(
-  database1.append,
-  database2.append,
-  lambda x: update_cancel()
+observer = (Linq.dummy()
+  .dispatch(lambda x: update_cancel())
+  .until(is_cancelled)
+  .repeat_infinity()
+  .take(1000)
+  .dispatch(
+    database1.append,
+    database2.append
+  )
 )
-
 observer.subscribe(get_data)
 ```
