@@ -23,7 +23,6 @@ for item in query:
 上記の挙動は非直感的であり、immutableでありません。
 pinqが提供する関数は、__iter__要求時にイテレータを生成し、一貫的な挙動を提供します。
 
-
 ```
 query = pinq([1,2,3]).map(lambda x: x)
 for item in query:
@@ -34,6 +33,21 @@ for item in query:
   print(item)
   # => 1, 2, 3
 ```
+
+ただし、イテレータはルートイテレータの挙動を引き継ぐことに注意してください。消費するイテレータをルートイテレータに利用すべきではありません。
+
+```
+query = Linq(map(lamdba x: x, [1, 2, 3]))
+
+for item in query:
+  print(item)
+  # => 1, 2, 3
+
+for item in query:
+  print(item)
+  # =>
+```
+
 
 # reuse
 我々は、時々同じクエリを使いましたい場面に遭遇します。
