@@ -54,15 +54,23 @@ for item in query:
 pinqは、クエリの再利用を提供し、スマートなコードを提供します。
 
 ```
+# way 1
 query = pinq.dummy().map(lambda x: x * 2)
 
 for item in query.attach([1, 2, 3])
   print(item)
   # =>  2, 4, 6
 
-for item in query.attach([4, 5, 6])
+for item in query([4, 5, 6])  # attachと同義
   print(item)
   # =>  8, 10, 12
+
+# way 2
+filter_even = pinq.dummy().filter(lambda x: x % 2 == 0)
+
+for item in filter_even([7, 8, 9])
+  print(item)
+  # =>  8
 ```
 
 # generator
