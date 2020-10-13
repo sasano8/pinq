@@ -148,7 +148,8 @@ def get_data():
 database1 = []
 database2 = []
 
-observer = (Linq.dummy()
+observer = (
+  Linq.dummy()
   .dispatch(lambda x: update_cancel())
   .until(is_cancelled)
   .repeat_infinity()
