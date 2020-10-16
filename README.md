@@ -166,7 +166,8 @@ observer.subscribe(get_data)
 ``` py
 event = Linq.event(
   on_error=lambda e: print("error"),
-  on_complete: print("complete")
+  on_success=
+  on_finally: print("complete")
 )
 event_even = Linq.dummy().filter(e => e % 2 == 0).dispatch(print)  # observer event handler
 event.add_handler(event_even)
@@ -176,10 +177,10 @@ event.occur(1)
 event.occur(2)
 # => 2 
 
-event.take(5).map(int).discharge(["1", "2", "3", "4", "5", "6"])
+event.take(5).map(int).stream(["1", "2", "3", "4", "5", "6"])
 # => 2 4 complete
 
-event.take(10).discharge([2, "a"])
+event.take(10).stream([2, "a"])
 # => 2 error
 ```
 
