@@ -176,7 +176,7 @@ event.occur(1)
 event.occur(2)
 # => 2 
 
-event.take(5).discharge([1, 2, 3, 4, 5, 6])
+event.take(5).map(int).discharge(["1", "2", "3", "4", "5", "6"])
 # => 2 4 complete
 
 event.take(10).discharge([2, "a"])
