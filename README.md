@@ -182,5 +182,28 @@ event.take(5).map(int).stream(["1", "2", "3", "4", "5", "6"])
 
 event.take(10).stream([2, "a"])
 # => 2 error
-```
 
+
+どんなパターンがあるか
+
+```
+query_dispatch_even = as_query = Linq.dummy().filter(e => e % 2 == 0).each(print)
+func_dispatch_even = as_query = Linq.dummy().filter(e => e % 2 == 0).each(print).to_func()
+func_dispatch_even = as_query = Linq.dummy().filter(e => e % 2 == 0).each(print).to_list
+result = query_dispatch_even([1, 2, 3, 4])
+print(result) # => type lazylinq
+for item in query_dispatch_even([1, 2, 3, 4]):  # => 2, 4
+  pass
+
+result = func_dispatch_even([1, 2, 3, 4])  => 2, 4
+print(result) # => type func
+for item in func_dispatch_even([1, 2, 3, 4]):  # => 2,4 戻り値はイテレータか、ファイナライザに応じた型がくるため実行可能
+  pass
+
+# オブサーバブルに流用することができる
+event.add_handler(query_dispatch_even)
+event.stream([1, 2, 3, 4, 5])
+
+for item in 
+
+```
